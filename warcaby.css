@@ -50,10 +50,13 @@
 }
 
 #start-game:hover{
-    background-color: black;
+    background-color: darkgray;
     color: white;
     transition: color 0.4s;
     border: none;
+}
+.welcome-screen-hide{
+    display: none;
 }
 
 .welcome-screen input {

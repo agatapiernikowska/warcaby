@@ -17,11 +17,16 @@
         <div>
         <input type="text" name="name"/>
         </div>
-    <div id="start-game" class="btn btn-danger">ZACZNIJ GRĘ</div>
+    <div id="start-game" class="btn" onclick="addName()">ZACZNIJ GRĘ</div>
     </form>
 </div>
-<div id="app"></div>
 
+<div id="app"></div>
+<div class="score">
+    <div class="name"></div>
+    <div class="score">0 points</div>
+    <div class="timer">0 seconds</div>
+</div>
 
 <script src="utils.js"></script>
 <script src="warcaby.js"></script>
