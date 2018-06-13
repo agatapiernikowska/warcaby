@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <title>warcaby</title>
     <link href="warcaby.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
 <body>
+
+<div class="welcome-screen">
+
+    <p class="modal-title"><img src="warcaby.jpg" alt="warcaby">Zagraj w warcaby!<img src="warcaby.jpg" alt="warcaby"></p>
+    <p class="modal-brand-name">Podaj swoje imię</p>
+    <form>
+        <div>
+        <input type="text" name="name"/>
+        </div>
+    <div id="start-game" class="btn btn-danger">ZACZNIJ GRĘ</div>
+    </form>
+</div>
 <div id="app"></div>
 
 
 <script src="utils.js"></script>
 <script src="warcaby.js"></script>
+
 </body>
 </html>
