@@ -4,6 +4,7 @@ body {
     justify-content: center;
     margin-top: 100px;
 }
+
 /*WELCOME SCREEN*/
 
 .welcome-screen {
@@ -27,21 +28,19 @@ body {
     padding: 1rem;
 }
 
-.modal-title{
+.modal-title {
     font-size: 3em;
     color: #fff;
     text-align: center;
-    line-height:2em;
+    line-height: 2em;
     text-transform: uppercase;
 }
 
-
-.modal-brand-name{
+.modal-brand-name {
     text-shadow: 0 0 15px #421fff;
     font-size: 3em;
     letter-spacing: 0.2em;
 }
-
 
 #start-game {
     background-color: white;
@@ -55,13 +54,14 @@ body {
     border: none;
 }
 
-#start-game:hover{
+#start-game:hover {
     background-color: darkgray;
     color: white;
     transition: color 0.4s;
     border: none;
 }
-.welcome-screen-hide{
+
+.welcome-screen-hide {
     display: none;
 }
 
@@ -84,7 +84,7 @@ body {
 
 .black, .white {
     display: table-cell;
-    border-color: grey ;
+    border-color: grey;
     border-width: 1px;
     border-style: solid;
     width: 50px;
