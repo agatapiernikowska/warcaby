@@ -1,17 +1,14 @@
-function createTable () {
-  var table = document.createElement('table');
-  var tbody = document.createElement('tbody');
-  var tr, td, x, y;
+var welcomeScreen = document.querySelector(".welcome-screen");
+var myButton = document.querySelector('.btn');
+var input = document.getElementsByTagName('input')[0];
+var myUl = document.getElementsByTagName('ul')[0];
 
-  for (y = 0; y < 10; y += 1) {
-    tr = document.createElement('tr');
-    for (x = 0; x < 10; x += 1) {
-      td = document.createElement('td');
-      tr.appendChild(td);
-    }
-    tbody.appendChild(tr);
-  }
 
-  table.appendChild(tbody);
-  return table;
-}
+
+myButton.addEventListener('click', function(){
+  var newLi = document.createElement('li');
+  newLi.textContent = input.value;
+  myUl.appendChild(newLi);
+  input.value = "";
+  welcomeScreen.classList.add("welcome-screen-hide");
+});

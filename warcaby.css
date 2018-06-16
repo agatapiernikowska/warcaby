@@ -1,3 +1,9 @@
+body {
+    background-color: lightgrey;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
 /*WELCOME SCREEN*/
 
 .welcome-screen {
@@ -59,7 +65,7 @@
     display: none;
 }
 
-.welcome-screen input {
+.myInput {
     width: 200px;
     height: 50px;
     margin-bottom: 20px;
@@ -70,17 +76,29 @@
 
 /*BOARD*/
 
-td {
-    border: 1px solid black;
+.row {
+    display: table-row;
+    margin: 0;
+    padding: 0;
+}
+
+.black, .white {
+    display: table-cell;
+    border-color: grey ;
+    border-width: 1px;
+    border-style: solid;
     width: 50px;
     height: 50px;
-  }
-
-#app tr:nth-child(2n) td:nth-child(2n+1) {
-    background: grey;
+    margin: 0;
+    padding: 0;
 }
 
-#app tr:nth-child(2n+1) td:nth-child(2n) {
-    background: grey;
+.black {
+    background-color: grey;
+    font-size: 12px;
 }
 
+.white {
+    background-color: #f7f7f7;
+    font-size: 12px;
+}
