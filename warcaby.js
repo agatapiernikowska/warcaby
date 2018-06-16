@@ -21,7 +21,22 @@ function createBoard() {
         cell.innerText = x + z[y];
       }
 
-      cell.setAttribute("draggable", "false");
+      // adding pawns
+      if ((x + y) % 2 != 0 && y != 4 && y != 5) {
+        var img = document.createElement("img");
+        if (y < 5) {
+          img.id = "w" +cell.id;
+          img.src = "Images/bialy.jpg";
+        }
+        else {
+          img.id = "b" + cell.id;
+          img.src = "Images/czarny.jpg";
+        }
+        img.className = "pawn";
+        img.setAttribute("move", "true");
+        cell.appendChild(img);
+      }
+      cell.setAttribute("move", "false");
       row.appendChild(cell);
     }
   }
