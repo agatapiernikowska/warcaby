@@ -25,3 +25,16 @@ function printDuration() {
   }, 1000);
 }
 
+// LAST SCREEEN
+var lastScreenHide = document.querySelector(".last-screen-hide");
+var lastButton = document.querySelector('.btn-last');
+
+lastButton.addEventListener('click', function(){
+  lastScreenHide.classList.add("last-screen");
+});
+
+function resetGame() {
+  window.location.reload();
+}
+var resetBtn = document.querySelector('.reset-btn');
+resetBtn.addEventListener('click', resetGame);

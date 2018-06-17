@@ -8,13 +8,13 @@
 <body>
 
 <div class="welcome-screen">
-    <p class="modal-title"><img src="Images/warcaby.jpg" alt="warcaby">Zagraj w warcaby!<img src="Images/warcaby.jpg"
-                                                                                             alt="warcaby"></p>
+    <p class="modal-title"><img src="Images/warcaby.jpg" alt="warcaby">Zagraj w warcaby!<img src="Images/warcaby.jpg" alt="warcaby"></p>
     <p class="modal-brand-name">Podaj swoje imię</p>
     <div><input type="text" id="myInput1" placeholder="Enter Player 1 name..."/></div>
     <div><input type="text" id="myInput2" placeholder="Enter Player 2 name..."/></div>
     <div id="start-game" class="btn" onclick="printDuration()">ZACZNIJ GRĘ</div>
 </div>
+
 
 <div id="board">
 </div>
@@ -29,7 +29,16 @@
 
     <div id="point">0 points</div>
     <div id="timer">0 seconds</div>
+    <div id="finish-screen" class="btn-last">ZAKONCZ GRĘ</div>
 </div>
+
+<div class="last-screen-hide">
+    <p class="modal-title">Koniec gry...</p>
+    <p class="modal-brand-name">Zwycięzca...</p>
+    <div id="reset-game" class="reset-btn">NOWA GRA</div>
+</div>
+</div>
+
 
 
 <script src="warcaby.js"></script>
