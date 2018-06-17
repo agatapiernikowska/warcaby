@@ -25,7 +25,7 @@ function createBoard() {
       if ((x + y) % 2 != 0 && y != 4 && y != 5) {
         var img = document.createElement("img");
         if (y < 5) {
-          img.id = "w" +cell.id;
+          img.id = "w" + cell.id;
           img.src = "Images/bialy.jpg";
         }
         else {
@@ -67,4 +67,189 @@ function canDrop() {
 
 createBoard();
 canDrop();
+
+function dragOver(e) {
+  e.preventDefault();
+  // Get the img pawn which is being dragged
+  var dragID = e.dataTransfer.getData("text");
+  var dragPawn = document.getElementById(dragID);
+
+  if (dragPawn) {
+    if (e.target.tagName === "DIV" &&
+      isValidMove(dragPawn, e.target, false)) {
+      e.dataTransfer.dropEffect = "move";
+    }
+    else {
+      e.dataTransfer.dropEffect = "none";
+    }
+  }
+}
+
+function dragStart(e) {
+  if (e.target.draggable) {
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text", e.target.id);
+    e.target.classList.add("selected");
+  }
+}
+
+function dragEnd(e) {
+  e.target.classList.remove("selected");
+}
+
+function drop(e) {
+  e.stopPropagation();
+  e.preventDefault();
+
+  var droppedID = e.dataTransfer.getData("text");
+  var droppedPawn = document.getElementById(droppedID);
+
+  if (droppedPawn &&
+    e.target.tagName === "DIV" &&
+    isValidMove(droppedPawn, e.target, true)) {
+
+    var newPawn = document.createElement("img");
+    newPawn.src = droppedPawn.src;
+    newPawn.id = droppedPawn.id.substr(0, 1) + e.target.id;
+    newPawn.draggable = droppedPawn.draggable;
+
+    if (droppedPawn.draggable) {
+      newPawn.classList.add("jumpOnly");
+    }
+    newPawn.classList.add("pawn");
+
+    newPawn.addEventListener("dragstart", dragStart, false);
+    newPawn.addEventListener("dragend", dragEnd, false);
+    e.target.appendChild(newPawn);
+
+    // Remove the previous image
+    droppedPawn.parentNode.removeChild(droppedPawn);
+
+    king(newPawn);
+  }
+}
+
+function dragEnter(e) {
+  var dragID = e.dataTransfer.getData("text");
+  var dragPawn = document.getElementById(dragID);
+
+  if (dragPawn &&
+    e.target.tagName === "DIV" &&
+    isValidMove(dragPawn, e.target, false)) {
+    e.target.classList.add('drop');
+  }
+}
+
+function dragLeave(e) {
+  e.target.classList.remove("drop");
+}
+
+var point = 0;
+
+function isValidMove(source, target, drop) {
+  var startPos = source.id.substr(1, 2);
+  var prefix = source.id.substr(0, 1);
+  var endPos = target.id;
+  if (endPos.length > 2) {
+    endPos = endPos.substr(1, 2);
+  }
+
+  // Drop pawn only on free cell
+  if (target.childElementCount != 0) {
+    return false;
+  }
+  // Position x and y
+  var xStart = parseInt(startPos.substr(0, 1));
+  var yStart = parseInt(startPos.substr(1, 1));
+  var xEnd = parseInt(endPos.substr(0, 1));
+  var yEnd = parseInt(endPos.substr(1, 1));
+// Pawns can't move backwards
+  switch (prefix) {
+    case "w":
+      if (yEnd <= yStart)
+        return false;
+      break;
+
+    case "b":
+      if (yEnd >= yStart)
+        return false;
+      break;
+  }
+
+  // Move must be diagonal
+  if (yStart === yEnd || xStart === xEnd)
+    return false;
+  if (Math.abs(yEnd - yStart) > 2 || Math.abs(xEnd - xStart) > 2)
+    return false;
+
+//Player can't delete pawn of the same color
+  var jumped = false;
+  var pointContainer = document.getElementById('point');
+  if (Math.abs(xEnd - xStart) === 2) {
+    var pos = ((xStart + xEnd) / 2).toString() +
+      ((yStart + yEnd) / 2).toString();
+    var div = document.getElementById(pos);
+    var img = div.children[0];
+    if (img.id.substr(0, 1).toLowerCase() === prefix.toLowerCase())
+      return false;
+    if (drop) {
+      div.removeChild(img);
+      point = point + 1;
+      pointContainer.textContent = point + ' points';
+    }
+  }
+
+  if (drop) {
+    enableNextPlayer(source);
+    if (jumped) {
+      source.draggable = true;
+      source.classList.add("jumpOnly");
+    }
+  }
+  return true;
+}
+
+function king(pawn) {
+  var newPawn;
+  // White King
+  if (pawn.id.substr(0, 1) === "w" && pawn.id.substr(2, 1) === "9") {
+    newPawn = document.createElement("img");
+    newPawn.src = "Images/bialyd.jpg";
+    newPawn.id = "W" + pawn.id.substr(1, 2);
+  }
+
+  // Black King
+  if (pawn.id.substr(0, 1) === "b" && pawn.id.substr(2, 1) === "0") {
+    var newPawn = document.createElement("img");
+    newPawn.src = "Images/czarnyd.jpg";
+    newPawn.id = "B" + pawn.id.substr(1, 2);
+  }
+
+  // Set properties to new pawn
+  if (newPawn) {
+    newPawn.draggable = true;
+    newPawn.classList.add("pawn");
+    newPawn.addEventListener('dragstart', dragStart, false);
+    newPawn.addEventListener('dragend', dragEnd, false);
+    var parent = pawn.parentNode;
+    parent.removeChild(pawn);
+    parent.appendChild(newPawn);
+  }
+}
+
+function enableNextPlayer(pawn) {
+  var pawns = document.querySelectorAll('img');
+  var i = 0;
+  while (i < pawns.length) {
+    var p = pawns[i++];
+    if (p.id.substr(0, 1).toUpperCase() ===
+      pawn.id.substr(0, 1).toUpperCase()) {
+      p.draggable = false;
+    }
+    else {
+      p.draggable = true;
+    }
+    p.classList.remove("jumpOnly");
+  }
+}
 

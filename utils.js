@@ -1,11 +1,10 @@
+// WELCOME SCREEEN
 var welcomeScreen = document.querySelector(".welcome-screen");
 var myButton = document.querySelector('.btn');
 var myInput1 = document.getElementById('myInput1');
 var myInput2 = document.getElementById('myInput2');
 var myUl1 = document.getElementById('ulOne');
 var myUl2 = document.getElementById('ulTwo');
-
-
 
 myButton.addEventListener('click', function(){
   var liOne = document.createElement('li');
@@ -14,8 +13,6 @@ myButton.addEventListener('click', function(){
   liTwo.textContent = myInput2.value;
   myUl1.appendChild(liOne);
   myUl2.appendChild(liTwo);
-  myInput1.value = "";
-  myInput2.value = "";
   welcomeScreen.classList.add("welcome-screen-hide");
 });
 
@@ -27,3 +24,4 @@ function printDuration() {
     document.getElementById("timer").innerHTML = cnt + " seconds";
   }, 1000);
 }
+
