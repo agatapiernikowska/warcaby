@@ -21,7 +21,7 @@ function createBoard() {
         cell.innerText = x + z[y];
       }
 
-      // adding pawns
+// adding pawns
       if ((x + y) % 2 != 0 && y != 4 && y != 5) {
         var img = document.createElement("img");
         if (y < 5) {
@@ -42,4 +42,29 @@ function createBoard() {
   }
 }
 
+function canDrop() {
+
+
+  var cells = document.querySelectorAll('.black');
+  var i = 0;
+  while (i < cells.length) {
+    var c = cells[i++];
+    // Add the event listeners
+    c.addEventListener('dragover', dragOver, false);
+    c.addEventListener('drop', drop, false);
+    c.addEventListener('dragenter', dragEnter, false);
+    c.addEventListener('dragleave', dragLeave, false);
+  }
+
+  i = 0;
+  var pawns = document.querySelectorAll('img');
+  while (i < pawns.length) {
+    var p = pawns[i++];
+    p.addEventListener('dragstart', dragStart, false);
+    p.addEventListener('dragend', dragEnd, false);
+  }
+}
+
 createBoard();
+canDrop();
+

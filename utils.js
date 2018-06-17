@@ -1,13 +1,21 @@
 var welcomeScreen = document.querySelector(".welcome-screen");
 var myButton = document.querySelector('.btn');
-var input = document.getElementsByTagName('input')[0];
-var myUl = document.getElementsByTagName('ul')[0];
+var myInput1 = document.getElementById('myInput1');
+var myInput2 = document.getElementById('myInput2');
+var myUl1 = document.getElementById('ulOne');
+var myUl2 = document.getElementById('ulTwo');
 
-myButton.addEventListener('click', function () {
-  var newLi = document.createElement('li');
-  newLi.textContent = input.value;
-  myUl.appendChild(newLi);
-  input.value = "";
+
+
+myButton.addEventListener('click', function(){
+  var liOne = document.createElement('li');
+  var liTwo = document.createElement('li');
+  liOne.textContent = myInput1.value;
+  liTwo.textContent = myInput2.value;
+  myUl1.appendChild(liOne);
+  myUl2.appendChild(liTwo);
+  myInput1.value = "";
+  myInput2.value = "";
   welcomeScreen.classList.add("welcome-screen-hide");
 });
 

@@ -11,7 +11,8 @@
     <p class="modal-title"><img src="Images/warcaby.jpg" alt="warcaby">Zagraj w warcaby!<img src="Images/warcaby.jpg"
                                                                                              alt="warcaby"></p>
     <p class="modal-brand-name">Podaj swoje imię</p>
-    <div><input type="text" class="myInput" placeholder="Enter your name..."/></div>
+    <div><input type="text" id="myInput1" placeholder="Enter Player 1 name..."/></div>
+    <div><input type="text" id="myInput2" placeholder="Enter Player 2 name..."/></div>
     <div id="start-game" class="btn" onclick="printDuration()">ZACZNIJ GRĘ</div>
 </div>
 
@@ -19,10 +20,14 @@
 </div>
 
 <div class="score">
-    <ul>
-        Player 1:
+    <ul id="ulOne">
+        Player 1
     </ul>
-    <div class="score">0 points</div>
+    <ul id="ulTwo">
+        Player 2
+    </ul>
+
+    <div id="point">0 points</div>
     <div id="timer">0 seconds</div>
 </div>
 
