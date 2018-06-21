@@ -154,10 +154,13 @@ function isValidMove(source, target, drop) {
     endPos = endPos.substr(1, 2);
   }
 
+
   // Drop pawn only on free cell
   if (target.childElementCount != 0) {
     return false;
   }
+
+
   // Position x and y
   var xStart = parseInt(startPos.substr(0, 1));
   var yStart = parseInt(startPos.substr(1, 1));
@@ -182,6 +185,7 @@ function isValidMove(source, target, drop) {
   if (Math.abs(yEnd - yStart) > 2 || Math.abs(xEnd - xStart) > 2)
     return false;
 
+
 //Player can't delete pawn of the same color
   var jumped = false;
   var pointContainer = document.getElementById('point');
@@ -196,6 +200,7 @@ function isValidMove(source, target, drop) {
       div.removeChild(img);
       point = point + 1;
       pointContainer.textContent = point + ' points';
+      jumped = true;
     }
   }
 
@@ -209,7 +214,10 @@ function isValidMove(source, target, drop) {
   return true;
 }
 
-function king(pawn) {
+function king(pawn){
+if (pawn.id.substr(0, 1) === "W" || pawn.id.substr(0, 1) === "B")
+  return;
+
   var newPawn;
   // White King
   if (pawn.id.substr(0, 1) === "w" && pawn.id.substr(2, 1) === "9") {
