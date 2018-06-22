@@ -3,22 +3,23 @@ function createBoard() {
   var board = document.getElementById("board");
 
   var z = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
+  var g = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   for (var y = 0; y < 10; y++) {
     var row = document.createElement("div");
     row.className = "row";
     board.appendChild(row);
 
 
-    for (var x = 1; x < 11; x++) {
+    for (var x = 0; x < 10; x++) {
       var cell = document.createElement("div");
       cell.id = x.toFixed() + y.toString();
       if ((x + y) % 2) {
         cell.className = "black";
-        cell.innerText = x + z[y];
+        cell.innerText = g[x] + z[y];
       }
       else {
         cell.className = "white";
-        cell.innerText = x + z[y];
+        cell.innerText = g[x] + z[y];
       }
 
 // adding pawns
@@ -160,6 +161,10 @@ function isValidMove(source, target, drop) {
     return false;
   }
 
+  var jumpOnly = false;
+  if (source.classList.contains("jumpOnly")) {
+    jumpOnly = true;
+  }
 
   // Position x and y
   var xStart = parseInt(startPos.substr(0, 1));
@@ -185,6 +190,8 @@ function isValidMove(source, target, drop) {
   if (Math.abs(yEnd - yStart) > 2 || Math.abs(xEnd - xStart) > 2)
     return false;
 
+  if (Math.abs(xEnd - xStart) === 1 && jumpOnly)
+    return false;
 
 //Player can't delete pawn of the same color
   var jumped = false;
