@@ -204,9 +204,9 @@ function isValidMove(source, target, drop, pawn) {
     if (drop) {
       div.removeChild(img);
       pointOne = pointOne + 1;
-      // pointTwo = pointTwo + 1;
+      pointTwo = pointTwo + 1;
       pointContainerOne.textContent = pointOne + ' points';
-      // pointContainerTwo.textContent = pointTwo + ' points';
+      pointContainerTwo.textContent = pointTwo + ' points';
       jumped = true;
     }
 
