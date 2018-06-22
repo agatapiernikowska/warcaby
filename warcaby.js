@@ -145,17 +145,16 @@ function dragLeave(e) {
   e.target.classList.remove("drop");
 }
 
-var point = 0;
+var pointOne = 0;
+var pointTwo = 0;
 
-function isValidMove(source, target, drop) {
+function isValidMove(source, target, drop, pawn) {
   var startPos = source.id.substr(1, 2);
   var prefix = source.id.substr(0, 1);
   var endPos = target.id;
   if (endPos.length > 2) {
     endPos = endPos.substr(1, 2);
   }
-
-
   // Drop pawn only on free cell
   if (target.childElementCount != 0) {
     return false;
@@ -165,7 +164,6 @@ function isValidMove(source, target, drop) {
   if (source.classList.contains("jumpOnly")) {
     jumpOnly = true;
   }
-
   // Position x and y
   var xStart = parseInt(startPos.substr(0, 1));
   var yStart = parseInt(startPos.substr(1, 1));
@@ -183,7 +181,6 @@ function isValidMove(source, target, drop) {
         return false;
       break;
   }
-
   // Move must be diagonal
   if (yStart === yEnd || xStart === xEnd)
     return false;
@@ -192,10 +189,10 @@ function isValidMove(source, target, drop) {
 
   if (Math.abs(xEnd - xStart) === 1 && jumpOnly)
     return false;
-
 //Player can't delete pawn of the same color
   var jumped = false;
-  var pointContainer = document.getElementById('point');
+  var pointContainerOne = document.getElementById('pointOne');
+  var pointContainerTwo = document.getElementById('pointTwo');
   if (Math.abs(xEnd - xStart) === 2) {
     var pos = ((xStart + xEnd) / 2).toString() +
       ((yStart + yEnd) / 2).toString();
@@ -203,12 +200,16 @@ function isValidMove(source, target, drop) {
     var img = div.children[0];
     if (img.id.substr(0, 1).toLowerCase() === prefix.toLowerCase())
       return false;
+
     if (drop) {
       div.removeChild(img);
-      point = point + 1;
-      pointContainer.textContent = point + ' points';
+      pointOne = pointOne + 1;
+      // pointTwo = pointTwo + 1;
+      pointContainerOne.textContent = pointOne + ' points';
+      // pointContainerTwo.textContent = pointTwo + ' points';
       jumped = true;
     }
+
   }
 
   if (drop) {
